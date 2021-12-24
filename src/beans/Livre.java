@@ -1,6 +1,13 @@
 package beans;
 
-public class Livre {
+import java.io.Serializable;
+
+public class Livre implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4527385508106905722L;
+	
 	private int isbn;
 	private String title;
 	private String auteur;

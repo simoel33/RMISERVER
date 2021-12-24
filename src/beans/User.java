@@ -1,6 +1,12 @@
 package beans;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5013519858298356150L;
 	private String id;
 	private String name;
 	private String category;

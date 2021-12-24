@@ -63,4 +63,16 @@ public class ServiceImp extends UnicastRemoteObject implements IBiblio {
 		
 	}
 
+	@Override
+	public Livre findBookById(int isbn) {
+		return LivreDb.findBookById(isbn);
+	}
+
+	@Override
+	public ArrayList<Livre> getLivresEmpruntee() {
+		return LivreDb.getLivresEmpruntee();
+	}
+
+	
+
 }

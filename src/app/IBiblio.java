@@ -15,6 +15,9 @@ public interface IBiblio extends Remote {
     public  void AddBook(Livre livre) throws RemoteException;
     public void deleteBook(int isbn) throws  RemoteException;
     public void Emprunter(Livre v,User u,String date) throws  RemoteException;
+    public Livre findBookById(int isbn) throws  RemoteException;
+    public ArrayList<Livre> getLivresEmpruntee() throws  RemoteException;
+    
     
     //les méthodes de user
     public User findUserById(String id) throws RemoteException;

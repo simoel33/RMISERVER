@@ -124,6 +124,35 @@ static public Livre findBookById(int isbn) {
 }
 
 
+static public ArrayList<Livre> getLivresEmpruntee(){
+    ArrayList<Livre>	list = new ArrayList<>();
+    
+
+		try (Connection connection = init()) {
+
+			
+			try (java.sql.Statement statement = connection.createStatement()) {
+				String strSql = "SELECT * FROM livres where livres.isbn in (select isbn from livre_user) ";
+				try (ResultSet resultSet = statement.executeQuery(strSql)) {
+					while (resultSet.next()) {
+						Livre u = new Livre(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+								resultSet.getString(4));
+						list.add(u);
+					}
+					return list;
+
+				}
+			}
+
+		} catch (Exception exception) {
+
+			throw new RuntimeException(exception);
+
+		}
+
+    
+   
+}
 
 
 
