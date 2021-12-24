@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import beans.Livre;
+import beans.LivresEmpunteeByUsers;
 import beans.User;
 import db.LivreDb;
 import db.UserDb;
@@ -41,8 +42,7 @@ public class ServiceImp extends UnicastRemoteObject implements IBiblio {
 
 	@Override
 	public void Emprunter(Livre v, User u, String date) throws RemoteException {
-	LivreDb.emprunter(v, u, date);
-		
+	LivreDb.emprunter(v, u, date);	
 	}
 
 	@Override
@@ -69,8 +69,38 @@ public class ServiceImp extends UnicastRemoteObject implements IBiblio {
 	}
 
 	@Override
-	public ArrayList<Livre> getLivresEmpruntee() {
+	public ArrayList<LivresEmpunteeByUsers> getLivresEmpruntee() {
 		return LivreDb.getLivresEmpruntee();
+	}
+
+	@Override
+	public ArrayList<Livre> filterByAuthor(String auteur) {
+		// TODO Auto-generated method stub
+		return LivreDb.filterByAuthor(auteur);
+	}
+
+	@Override
+	public ArrayList<Livre> filterByEditeur(String editeur) {
+		// TODO Auto-generated method stub
+		return LivreDb.filterByEditeur(editeur);
+	}
+
+	@Override
+	public ArrayList<Livre> filterByTitle(String title) {
+		// TODO Auto-generated method stub
+		return LivreDb.filterByTitle(title);
+	}
+
+	@Override
+	public ArrayList<User> filterByCategory(String category) {
+		// TODO Auto-generated method stub
+		return UserDb.filterByCategory(category);
+	}
+
+	@Override
+	public ArrayList<User> filterByAdress(String address) {
+		// TODO Auto-generated method stub
+		return UserDb.filterByAdress(address);
 	}
 
 	

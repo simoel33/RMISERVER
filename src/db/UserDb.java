@@ -3,7 +3,9 @@ package db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import beans.Livre;
 import beans.User;
 
 public class UserDb extends DAOContext{
@@ -68,4 +70,66 @@ static public void deleteUser(String id) {
 	}
 }
 	
+
+static public ArrayList<User> filterByCategory(String category){
+    ArrayList<User>	list = new ArrayList<>();
+    
+
+		try (Connection connection = init()) {
+			String strSql = "SELECT * FROM users where category=?";
+			
+			try (PreparedStatement statement= connection.prepareStatement(strSql)) {
+                       statement.setString(1, category);
+				try (ResultSet resultSet = statement.executeQuery()) {
+					while (resultSet.next()) {
+						User u = new User(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+								resultSet.getString(4));
+						list.add(u);
+					}
+					return list;
+
+				}
+			}
+
+		} catch (Exception exception) {
+
+			throw new RuntimeException(exception);
+
+		}
+
+    
+   
+}
+
+static public ArrayList<User> filterByAdress(String address){
+    ArrayList<User>	list = new ArrayList<>();
+    
+
+		try (Connection connection = init()) {
+			String strSql = "SELECT * FROM users where address=?";
+			
+			try (PreparedStatement statement= connection.prepareStatement(strSql)) {
+                       statement.setString(1, address);
+				try (ResultSet resultSet = statement.executeQuery()) {
+					while (resultSet.next()) {
+						User u = new User(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+								resultSet.getString(4));
+						list.add(u);
+					}
+					return list;
+
+				}
+			}
+
+		} catch (Exception exception) {
+
+			throw new RuntimeException(exception);
+
+		}
+
+    
+   
+}
+
+
 }
