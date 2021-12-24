@@ -67,7 +67,7 @@ static public void inserBook(Livre u) {
 static public void emprunter(Livre v,User u,String date) {
 	
 	try (Connection connection = init()) {
-		String strSql = "insert into livre_user values (?,?,?,?)";
+		String strSql = "insert into livre_user values (?,?,?)";
 		try (PreparedStatement statement = connection.prepareStatement(strSql)) {
 			
 			statement.setInt(1, v.getIsbn());
@@ -101,6 +101,30 @@ static public void deleteBook(int isbn) {
 
 	}
 }
+
+static public Livre findBookById(int isbn) {
+	Livre u=null;
+	try (Connection connection = init()) {
+		String strSql = "select * from livres where isbn=?";
+		try (PreparedStatement statement = connection.prepareStatement(strSql)) {
+
+			statement.setInt(1, isbn);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					 u = new Livre(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+							resultSet.getString(4));
+				}}
+		}
+	} catch (Exception exception) {
+
+		throw new RuntimeException(exception);
+
+	}
+		return u;
+}
+
+
+
 
 
 }

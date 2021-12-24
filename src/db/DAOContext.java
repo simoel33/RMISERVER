@@ -15,6 +15,7 @@ public class DAOContext {
 			urldb="jdbc:mysql://localhost/biblio";
 			userdb="root";
 			Connection connection = DriverManager.getConnection(urldb, userdb, "");
+			System.out.println("connection etavli");
 			return connection;
 		} catch (Exception e) {
 			e.printStackTrace();
